@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#121212] text-white;
+  }
+}
+
+@layer components {
+  /* global */
+  .page {
+    @apply grid grid-cols-[20rem_1fr] h-screen grid-rows-[1fr_5rem];
+  }
+
+  /* sidebar */
+  .nav-item {
+    @apply flex items-center gap-4 select-none py-3 pl-8 relative fill-white text-white font-semibold cursor-pointer;
+  }
+}

@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Player from "../common/Player";
 import Sidebar from "../common/Sidebar";
-import Home from "../components/Home";
+import Search from "../components/Search";
 
-export default function home() {
+export default function search() {
   return (
     <div className="page">
       <Head>
@@ -13,7 +13,7 @@ export default function home() {
       </Head>
 
       <Sidebar />
-      <Home />
+      <Search />
       <Player />
     </div>
   );
