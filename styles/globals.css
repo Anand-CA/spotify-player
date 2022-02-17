@@ -2,20 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Circular Std";
+  src: url(/fonts/CircularStdMedium.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Circular Std";
+  font-weight: 700;
+  src: url(/fonts/CircularStdBook.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Circular Std";
+  font-weight: 900;
+  src: url(/fonts/CircularStdBlack.ttf) format("truetype");
+}
+
 @layer base {
   body {
-    @apply bg-[#121212] text-white;
+    @apply bg-[#121212] text-white font-circular;
   }
 }
 
 @layer components {
   /* global */
   .page {
-    @apply grid grid-cols-[20rem_1fr] h-screen grid-rows-[1fr_5rem];
+    @apply grid grid-cols-[20rem_1fr] h-screen grid-rows-[1fr_auto];
   }
 
   /* sidebar */
   .nav-item {
-    @apply flex items-center gap-4 select-none py-3 pl-8 relative fill-white text-white font-semibold cursor-pointer;
+    @apply flex items-center  gap-4 select-none py-3 pl-8 relative fill-white text-white cursor-pointer font-medium;
   }
 }
