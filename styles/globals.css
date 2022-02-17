@@ -28,7 +28,7 @@
 @layer components {
   /* global */
   .page {
-    @apply grid grid-cols-[20rem_1fr] h-screen grid-rows-[1fr_auto];
+    @apply grid grid-cols-1 xl:grid-cols-[20rem_1fr] md:grid-cols-[17rem_1fr] h-screen grid-rows-[1fr_auto];
   }
 
   /* sidebar */

@@ -7,7 +7,7 @@ function Sidebar() {
   const router = useRouter();
 
   return (
-    <aside className="bg-[#030303] py-5">
+    <aside className="bg-[#030303] py-5 hidden md:block overflow-y-auto">
       <svg
         className="h-12 ml-8 mb-6"
         viewBox="0 0 177 53"
@@ -179,7 +179,10 @@ function Sidebar() {
         </p>{" "}
         <p className="cursor-pointer select-none opacity-60">
           Rock Save the Queen
-        </p>
+        </p>{" "}
+        <p className="cursor-pointer select-none opacity-60">
+          Rock Save the Queen
+        </p>{" "}
       </div>
     </aside>
   );

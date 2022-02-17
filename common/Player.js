@@ -3,7 +3,7 @@ import React from "react";
 
 function Player() {
   return (
-    <footer className="bg-[#282828] grid grid-cols-3 col-span-2 p-3">
+    <footer className="bg-[#282828] sm:gap-0 gap-3 grid md:grid-cols-3 col-span-2 p-3">
       {/* grid item */}
       <div className="flex self-center gap-5 items-center">
         <Image
