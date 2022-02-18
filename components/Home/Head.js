@@ -3,7 +3,7 @@ import React from "react";
 
 function Head() {
   return (
-    <div className="px-5 py-1.5 flex backdrop-blur-lg items-center sticky top-0 justify-between mb-10">
+    <div className="px-5 py-2 flex backdrop-blur-lg items-center sticky top-0 justify-between mb-10">
       {/* left */}
       <div className="flex items-center gap-3">
         <svg

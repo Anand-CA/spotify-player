@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import Head from "./Head";
 
 function Search() {
   return (
-    <div>Search</div>
-  )
+    <div>
+      <Head />
+    </div>
+  );
 }
 
-export default Search
+export default Search;

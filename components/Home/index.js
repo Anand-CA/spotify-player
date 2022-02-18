@@ -4,7 +4,7 @@ import Section from "./Section";
 
 function Home() {
   return (
-    <div className="overflow-y-auto">
+    <div className="overflow-y-auto scrollbar-hide">
       <Head />
 
       <div className="px-5 pb-4 space-y-8">
