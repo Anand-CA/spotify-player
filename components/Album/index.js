@@ -37,9 +37,9 @@ function Album() {
       <Songs album={album} />
 
       {/* bg image */}
-      <div className="absolute -z-10 top-0 left-0 right-0 bottom-0 ">
+      <div className="fixed -z-10 top-0 bottom-0 right-0 left-0">
         <img
-          className="w-full h-full object-cover"
+          className="h-full opacity-50 w-full object-cover"
           src={album?.images[0]?.url}
           alt=""
         />

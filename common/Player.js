@@ -71,50 +71,66 @@ function Player() {
   }
 
   return (
-    <footer className="bg-[#282828] sm:gap-0 gap-3 grid z-50 md:grid-cols-3 sticky bottom-0 col-span-2 p-3">
+    <footer
+      
+      className="bg-[#282828] sm:gap-0 gap-3 grid z-30 md:grid-cols-3 sticky bottom-0 col-span-2 p-3"
+    >
       {/* grid item */}
-      <div className="flex self-center gap-5 items-center">
-        <img height={50} width={50} src={track?.album?.images[0]?.url} alt="" />
 
-        <div className="">
-          <h3 className="font-semibold ">{track?.name}</h3>
-          <p className="opacity-60 text-sm">Madness</p>
+      {track ? (
+        <div className="flex self-center gap-5 items-center">
+          <img
+            height={50}
+            width={50}
+            src={track?.album?.images[0]?.url}
+            alt=""
+          />
+
+          <div className="">
+            <h3 className="font-semibold ">{track?.name}</h3>
+            <p className="opacity-60 text-sm">
+              {track.artists.map((a) => a.name).join(", ")}
+            </p>
+          </div>
+
+          <svg
+            className="h-5"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.5"
+              d="M7.6335 4.12072L8 4.51564L8.3665 4.12072L8.91212 3.53278C10.1564 2.19195 12.2047 2.15185 13.4966 3.44081C14.7985 4.7398 14.8392 6.89535 13.5853 8.24649L8.3665 13.87C8.16866 14.0832 7.83134 14.0832 7.6335 13.87L2.4147 8.24649C1.16081 6.89536 1.20146 4.7398 2.50339 3.44081C3.79527 2.15185 5.84356 2.19195 7.08788 3.53278L7.6335 4.12072Z"
+              stroke="white"
+              strokeLinecap="round"
+            />
+          </svg>
+
+          <svg
+            className="h-5"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.5"
+              d="M1.35002 3.25V11.8H14.65V3.25H1.35002ZM1.35002 2.3H14.65C14.902 2.3 15.1436 2.40009 15.3218 2.57825C15.4999 2.75641 15.6 2.99804 15.6 3.25V12.75C15.6 13.002 15.4999 13.2436 15.3218 13.4218C15.1436 13.5999 14.902 13.7 14.65 13.7H1.35002C1.09807 13.7 0.856433 13.5999 0.678273 13.4218C0.500113 13.2436 0.400024 13.002 0.400024 12.75V3.25C0.400024 2.99804 0.500113 2.75641 0.678273 2.57825C0.856433 2.40009 1.09807 2.3 1.35002 2.3Z"
+              fill="white"
+            />
+            <path
+              opacity="0.5"
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M9.90002 8H13.7V10.85H9.90002V8Z"
+              fill="white"
+            />
+          </svg>
         </div>
+      ) : (
+        <div className="self-center pl-4">No active track ...</div>
+      )}
 
-        <svg
-          className="h-5"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            opacity="0.5"
-            d="M7.6335 4.12072L8 4.51564L8.3665 4.12072L8.91212 3.53278C10.1564 2.19195 12.2047 2.15185 13.4966 3.44081C14.7985 4.7398 14.8392 6.89535 13.5853 8.24649L8.3665 13.87C8.16866 14.0832 7.83134 14.0832 7.6335 13.87L2.4147 8.24649C1.16081 6.89536 1.20146 4.7398 2.50339 3.44081C3.79527 2.15185 5.84356 2.19195 7.08788 3.53278L7.6335 4.12072Z"
-            stroke="white"
-            strokeLinecap="round"
-          />
-        </svg>
-
-        <svg
-          className="h-5"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            opacity="0.5"
-            d="M1.35002 3.25V11.8H14.65V3.25H1.35002ZM1.35002 2.3H14.65C14.902 2.3 15.1436 2.40009 15.3218 2.57825C15.4999 2.75641 15.6 2.99804 15.6 3.25V12.75C15.6 13.002 15.4999 13.2436 15.3218 13.4218C15.1436 13.5999 14.902 13.7 14.65 13.7H1.35002C1.09807 13.7 0.856433 13.5999 0.678273 13.4218C0.500113 13.2436 0.400024 13.002 0.400024 12.75V3.25C0.400024 2.99804 0.500113 2.75641 0.678273 2.57825C0.856433 2.40009 1.09807 2.3 1.35002 2.3Z"
-            fill="white"
-          />
-          <path
-            opacity="0.5"
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M9.90002 8H13.7V10.85H9.90002V8Z"
-            fill="white"
-          />
-        </svg>
-      </div>
       {/* grid item */}
       <div className="flex flex-col items-center gap-3">
         {/* controls */}

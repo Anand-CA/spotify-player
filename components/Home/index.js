@@ -9,16 +9,6 @@ function Home() {
 
       <div className="py-3 mt-8 px-5 space-y-8">
         <Section />
-        <Section />
-        <Section />
-        <Section />
-        <Section />
-        <Section />
-        <Section />
-        <Section />
-        <Section />
-        <Section />
-        <Section />
       </div>
     </div>
   );

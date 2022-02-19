@@ -20,6 +20,7 @@ function Section() {
       <Swiper
         spaceBetween={20}
         slidesPerView={6}
+        slidesPerGroup={4}
         breakpoints={{
           1726: {
             slidesPerView: 6,

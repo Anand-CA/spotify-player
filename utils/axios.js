@@ -1,4 +1,9 @@
 import axios from "axios";
+// router
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  window.location.href = "/login";
+};
 
 const handleLogin = () => {
   var myHeaders = new Headers();
@@ -55,8 +60,7 @@ instance.interceptors.response.use(
   },
   (error) => {
     if (error.response.status === 401) {
-      handleLogin();
-      window.location.reload();
+      handleLogout();
     }
     return Promise.reject(error);
   }
