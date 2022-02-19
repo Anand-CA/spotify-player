@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-function Head() {
+function Head({ query, setQuery }) {
   return (
     <div className="px-5 py-2 flex backdrop-blur-lg items-center sticky top-0 gap-3">
       {/* left */}
@@ -55,7 +55,9 @@ function Head() {
           <input
             type="text"
             className="text-black outline-none flex-1"
-            placeholder="Artists, songs, or podcasts"
+            placeholder="Artists, songs, or albums"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
         </div>
       </div>

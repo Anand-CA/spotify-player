@@ -39,16 +39,17 @@ function Player() {
     if (activeTrackId) {
       axios.get(`/tracks/${activeTrackId}`).then((res) => {
         setTrack(res.data);
+        playSong();
         console.log(res.data);
       });
     }
   }, [activeTrackId]);
 
   useEffect(() => {
-    audioRef.current.addEventListener("ended", () => pauseSong());
+    audioRef.current?.addEventListener("ended", () => pauseSong());
 
     return () => {
-      audioRef.current.removeEventListener("ended", () => pauseSong());
+      audioRef.current?.removeEventListener("ended", () => pauseSong());
     };
   }, []);
 
@@ -56,9 +57,9 @@ function Player() {
     setProgressBarWidth((currentTime / duration) * 100 + "%");
   }, [currentTime, duration]);
 
-  useEffect(() => {
-    playSong();
-  }, [activeTrackId]);
+  // useEffect(() => {
+  //   playSong();
+  // }, [activeTrackId]);
 
   function convertDuration(duration) {
     let minutes = Math.floor(duration / 60);
@@ -73,15 +74,7 @@ function Player() {
     <footer className="bg-[#282828] sm:gap-0 gap-3 grid z-50 md:grid-cols-3 sticky bottom-0 col-span-2 p-3">
       {/* grid item */}
       <div className="flex self-center gap-5 items-center">
-        {track && (
-          <Image
-            height={50}
-            width={50}
-            layout="fixed"
-            src={track.album.images[0].url}
-            alt=""
-          />
-        )}
+        <img height={50} width={50} src={track?.album?.images[0]?.url} alt="" />
 
         <div className="">
           <h3 className="font-semibold ">{track?.name}</h3>
@@ -151,40 +144,43 @@ function Player() {
 
           {isPlaying ? (
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-12"
+              className="h-10"
+              viewBox="0 0 64 64"
               fill="none"
-              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
               onClick={pauseSong}
-              stroke="currentColor"
             >
+              <circle cx="32" cy="32" r="32" fill="white" />
+
               <path
+                d="M27.4286 21.3333H24.381C23.5394 21.3333 22.8571 22.0155 22.8571 22.8571V41.1428C22.8571 41.9844 23.5394 42.6666 24.381 42.6666H27.4286C28.2702 42.6666 28.9524 41.9844 28.9524 41.1428V22.8571C28.9524 22.0155 28.2702 21.3333 27.4286 21.3333Z"
+                fill="#121212"
+              />
+              <path
+                d="M36.5714 22.3333H39.6191C39.9084 22.3333 40.1429 22.5678 40.1429 22.8571V41.1428C40.1429 41.4321 39.9084 41.6666 39.6191 41.6666H36.5714C36.2822 41.6666 36.0476 41.4321 36.0476 41.1428V22.8571C36.0476 22.5678 36.2822 22.3333 36.5714 22.3333Z"
+                fill="#121212"
+                stroke="#121212"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
           ) : (
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-12"
+              className="h-10"
+              viewBox="0 0 56 56"
               fill="none"
-              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
               onClick={playSong}
-              stroke="currentColor"
             >
+              <circle cx="28" cy="28" r="28" fill="white" />
               <path
+                d="M21.3334 17.3333V38.6667L38.6667 28L21.3334 17.3333Z"
+                fill="#121212"
+                stroke="#121212"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
           )}

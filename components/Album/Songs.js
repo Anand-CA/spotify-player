@@ -4,12 +4,11 @@ import useSound from "use-sound";
 import useAudio from "../../hooks/useAudio";
 import { setActiveTrack } from "../../redux/actions/albums";
 
-function Songs() {
+function Songs({ album }) {
   const dispatch = useDispatch();
-  const tracks = useSelector((state) => state.albums.album.tracks?.items);
 
   return (
-    <div className="py-3">
+    <div className="py-3 bg-black/80 backdrop-blur-lg h-full">
       <table className="w-full">
         <thead className="border-b-2 border-white/10">
           <tr>
@@ -28,18 +27,22 @@ function Songs() {
           </tr>
         </thead>
         <tbody>
-          {tracks?.map((t) => (
+          {album?.tracks?.items?.map((t, index) => (
             <tr
               key={t.id}
               onClick={() => {
-                dispatch({
-                  type: "SET_ACTIVE_TRACKID",
-                  payload: t.id,
-                });
+                if (t.preview_url) {
+                  dispatch({
+                    type: "SET_ACTIVE_TRACKID",
+                    payload: t.id,
+                  });
+                }
               }}
-              className="hover:bg-white/10 select-none"
+              className={`hover:bg-white/10 select-none  ${
+                !t.preview_url && "opacity-30"
+              }`}
             >
-              <td className="py-2 text-left px-5">1</td>
+              <td className="py-2 text-left px-5">{index + 1}</td>
               <td>{t.name}</td>
               <td>
                 <p className="text-sm">

@@ -1,5 +1,5 @@
 import React from "react";
-import Head from "../Album/Head";
+import Head from "./Head";
 import Section from "./Section";
 
 function Home() {
@@ -8,6 +8,11 @@ function Home() {
       <Head />
 
       <div className="py-3 mt-8 px-5 space-y-8">
+        <Section />
+        <Section />
+        <Section />
+        <Section />
+        <Section />
         <Section />
         <Section />
         <Section />

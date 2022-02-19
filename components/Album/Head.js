@@ -6,7 +6,7 @@ function Head() {
   const router = useRouter();
 
   return (
-    <div className="px-5 py-2 flex backdrop-blur-lg items-center sticky top-0 justify-between">
+    <div className="px-5 py-2 flex backdrop-blur-lg items-center sticky top-0 justify-between z-50">
       {/* left */}
       <div className="flex items-center gap-3">
         <svg

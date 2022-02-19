@@ -1,5 +1,5 @@
 import axios from "../../utils/axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "./Head";
 import Banner from "./Banner";
@@ -11,29 +11,39 @@ import { useDispatch, useSelector } from "react-redux";
 function Album() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const album = useSelector((state) => state.albums.album);
-
-  const id = router?.query?.id;
+  // const album = useSelector((state) => state.albums.album);
+  const [album, setAlbum] = useState(null);
+  const [id, setId] = useState(router.query.id);
 
   useEffect(() => {
-    dispatch(getAlbum(id));
+    if (id) {
+      axios.get(`/albums/${id}`).then((res) => {
+        setAlbum(res.data);
+      });
+    }
 
     return () => {
-      dispatch(resetAlbum());
+      setAlbum(null);
     };
-  }, [dispatch, id]);
+  }, [id]);
+
+  console.log(album);
 
   return (
-    <div
-      //   style={{
-      //     background: `url(${album.images[0].url}) no-repeat center / cover`,
-      //   }}
-      className="overflow-y-auto scrollbar-hide"
-    >
+    <div className="relative overflow-y-auto scrollbar-hide">
       <Head />
-      <Banner />
+      <Banner album={album} />
       {/* <Controls /> */}
-      <Songs />
+      <Songs album={album} />
+
+      {/* bg image */}
+      <div className="absolute -z-10 top-0 left-0 right-0 bottom-0 ">
+        <img
+          className="w-full h-full object-cover"
+          src={album?.images[0]?.url}
+          alt=""
+        />
+      </div>
     </div>
   );
 }
