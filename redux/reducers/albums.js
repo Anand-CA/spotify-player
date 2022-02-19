@@ -1,6 +1,9 @@
 const initialState = {
   newReleases: [],
   newReleaseErr: null,
+  album: {},
+  albumErr: null,
+  activeTrack: null,
 };
 
 export default function reducer(state = initialState, action) {
@@ -14,6 +17,23 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         newReleaseErr: action.payload,
+      };
+
+    case "GET_ALBUM_SUCCESS":
+      return {
+        ...state,
+        album: action.payload,
+      };
+    case "GET_ALBUM_FAILURE":
+      return {
+        ...state,
+        albumErr: action.payload,
+      };
+
+    case "RESET_ALBUM":
+      return {
+        ...state,
+        album: {},
       };
 
     default:

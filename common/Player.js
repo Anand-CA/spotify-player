@@ -1,21 +1,90 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Audio from "../hooks/Audio";
+import useAudio from "../hooks/useAudio";
+import axios from "../utils/axios";
 
 function Player() {
+  // redux
+  const dispatch = useDispatch();
+  const { activeTrackId, isPlaying } = useSelector((state) => state.track);
+
+  // states
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [progressBarWidth, setProgressBarWidth] = useState(0);
+  const [track, setTrack] = useState(null);
+
+  // ref
+  const audioRef = useRef(null);
+
+  function playSong() {
+    audioRef.current.play();
+    dispatch({
+      type: "PLAY_ACTIVE_TRACK",
+    });
+  }
+
+  function pauseSong() {
+    audioRef.current.pause();
+    dispatch({
+      type: "PAUSE_ACTIVE_TRACK",
+    });
+  }
+
+  // useEffects
+
+  useEffect(() => {
+    if (activeTrackId) {
+      axios.get(`/tracks/${activeTrackId}`).then((res) => {
+        setTrack(res.data);
+        console.log(res.data);
+      });
+    }
+  }, [activeTrackId]);
+
+  useEffect(() => {
+    audioRef.current.addEventListener("ended", () => pauseSong());
+
+    return () => {
+      audioRef.current.removeEventListener("ended", () => pauseSong());
+    };
+  }, []);
+
+  useEffect(() => {
+    setProgressBarWidth((currentTime / duration) * 100 + "%");
+  }, [currentTime, duration]);
+
+  useEffect(() => {
+    playSong();
+  }, [activeTrackId]);
+
+  function convertDuration(duration) {
+    let minutes = Math.floor(duration / 60);
+    let seconds = Math.floor(duration % 60);
+    if (seconds < 10) {
+      seconds = `0${seconds}`;
+    }
+    return `${minutes}:${seconds}`;
+  }
+
   return (
-    <footer className="bg-[#282828] sm:gap-0 gap-3 grid md:grid-cols-3 col-span-2 p-3">
+    <footer className="bg-[#282828] sm:gap-0 gap-3 grid z-50 md:grid-cols-3 sticky bottom-0 col-span-2 p-3">
       {/* grid item */}
       <div className="flex self-center gap-5 items-center">
-        <Image
-          height={50}
-          width={50}
-          layout="fixed"
-          src="https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228"
-          alt=""
-        />
+        {track && (
+          <Image
+            height={50}
+            width={50}
+            layout="fixed"
+            src={track.album.images[0].url}
+            alt=""
+          />
+        )}
 
         <div className="">
-          <h3 className="font-semibold ">One step Beyond</h3>
+          <h3 className="font-semibold ">{track?.name}</h3>
           <p className="opacity-60 text-sm">Madness</p>
         </div>
 
@@ -53,7 +122,6 @@ function Player() {
           />
         </svg>
       </div>
-
       {/* grid item */}
       <div className="flex flex-col items-center gap-3">
         {/* controls */}
@@ -81,21 +149,45 @@ function Player() {
             </g>
           </svg>
 
-          <svg
-            width="36"
-            height="36"
-            viewBox="0 0 36 36"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g opacity="0.7">
-              <circle cx="18" cy="18" r="17.5" stroke="white" />
+          {isPlaying ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-12"
+              fill="none"
+              viewBox="0 0 24 24"
+              onClick={pauseSong}
+              stroke="currentColor"
+            >
               <path
-                d="M24.8482 18.5L14.1517 12.325V24.675L24.8482 18.5Z"
-                fill="white"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
-            </g>
-          </svg>
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-12"
+              fill="none"
+              viewBox="0 0 24 24"
+              onClick={playSong}
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          )}
 
           <svg
             width="14"
@@ -116,9 +208,23 @@ function Player() {
 
         {/* progress bar */}
         <div className="flex w-full items-center gap-4 text-xs">
-          <span className="opacity-60">00:00</span>
-          <div className="bg-white/20 h-1.5 rounded-full  grow"></div>
-          <span className="opacity-60">02:15</span>
+          <span className="opacity-60">{convertDuration(currentTime)}</span>
+          {/* progress bar  */}
+          <div className="bg-white/20 h-1.5 rounded-full overflow-hidden grow">
+            <div
+              style={{ width: progressBarWidth }}
+              className="bg-white h-full"
+            />
+          </div>
+          <span className="opacity-60">{convertDuration(duration)}</span>
+
+          <Audio
+            ref={audioRef}
+            handleDuration={setDuration}
+            handleCurrentTime={setCurrentTime}
+            trackData={track?.preview_url}
+            isPlaying={isPlaying}
+          />
         </div>
       </div>
     </footer>

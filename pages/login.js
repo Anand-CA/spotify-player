@@ -37,7 +37,10 @@ export default function login() {
 
     fetch("https://accounts.spotify.com/api/token", requestOptions)
       .then((response) => response.json())
-      .then((result) => localStorage.setItem("token", JSON.stringify(result)))
+      .then((result) => {
+        localStorage.setItem("token", JSON.stringify(result));
+        router.push("/");
+      })
       .catch((error) => console.log("error", error));
   };
 

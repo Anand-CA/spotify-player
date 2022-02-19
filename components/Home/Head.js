@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function Head() {
   return (
-    <div className="px-5 py-2 flex backdrop-blur-lg items-center sticky top-0 justify-between mb-10">
+    <div className="px-5 py-2 flex backdrop-blur-lg items-center sticky top-0 justify-between z-50">
       {/* left */}
       <div className="flex items-center gap-3">
         <svg
@@ -38,15 +39,18 @@ function Head() {
       </div>
 
       {/* avatar div */}
+
       <div className="bg-white/10 flex items-center gap-2 rounded-full py-1 px-1.5">
-        <Image
-          height={33}
-          width={33}
-          className="rounded-full"
-          layout="fixed"
-          src="/avatar.jfif"
-          alt="avatar"
-        />
+        <Link passHref href="/login">
+          <Image
+            height={33}
+            width={33}
+            className="rounded-full"
+            layout="fixed"
+            src="/avatar.jfif"
+            alt="avatar"
+          />
+        </Link>
         <p className="opacity-60 mr-2">Arthur Guillermin Ha</p>
       </div>
     </div>

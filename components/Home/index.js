@@ -1,5 +1,5 @@
 import React from "react";
-import Head from "./Head";
+import Head from "../Album/Head";
 import Section from "./Section";
 
 function Home() {
@@ -7,7 +7,9 @@ function Home() {
     <div className="overflow-y-auto scrollbar-hide">
       <Head />
 
-      <div className="px-5 pb-4 space-y-8">
+      <div className="py-3 mt-8 px-5 space-y-8">
+        <Section />
+        <Section />
         <Section />
         <Section />
         <Section />

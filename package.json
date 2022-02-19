@@ -18,7 +18,9 @@
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
-    "tailwind-scrollbar-hide": "^1.1.7"
+    "swiper": "^8.0.6",
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "use-sound": "^4.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
