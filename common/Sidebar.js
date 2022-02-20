@@ -7,7 +7,7 @@ function Sidebar() {
   const router = useRouter();
 
   return (
-    <aside className="bg-[#030303] py-5 hidden md:block overflow-y-auto ">
+    <aside className="bg-[#030303] py-5 hidden lg:block overflow-y-auto scrollbar-hide">
       <svg
         className="h-12 ml-8 mb-6"
         viewBox="0 0 177 53"

@@ -6,7 +6,7 @@ function Banner({ playlist }) {
     (state) => state.playlists.playlistLoading
   );
   return (
-    <div className="py-24 px-5 backdrop-blur-sm">
+    <div className="py-32 px-5">
       {playlistLoading ? (
         <>
           <div className="animate-pulse bg-white/10 mb-3 w-12 h-4 rounded-xl"></div>

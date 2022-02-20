@@ -13,6 +13,10 @@ export const getNewReleases = () => async (dispatch) => {
   }
 };
 
+export const resetNewReleases = () => (dispatch) => {
+  dispatch({ type: "RESET_NEW_RELEASES" });
+};
+
 export const getAlbum = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`/albums/${id}`);
@@ -27,11 +31,4 @@ export const getAlbum = (id) => async (dispatch) => {
 
 export const resetAlbum = () => (dispatch) => {
   dispatch({ type: "RESET_ALBUM" });
-};
-
-export const setActiveTrack = (track) => (dispatch) => {
-  dispatch({
-    type: "SET_ACTIVE_TRACK",
-    payload: track,
-  });
 };

@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 function Banner({ album }) {
-  console.log({ album });
   return (
     <div className="py-32 px-5 relative flex items-end gap-6">
       {/* <img src={album.images[1]?.url} alt="" /> */}

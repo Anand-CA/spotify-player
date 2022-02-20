@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,7 +10,8 @@ function TrackCard({ t }) {
 
   const toggleLike = () => setLiked(!liked);
   return (
-    <div
+    <motion.div
+      layout
       key={t.id}
       onClick={() => {
         if (t.preview_url) {
@@ -69,7 +71,7 @@ function TrackCard({ t }) {
           />
         </svg>
       )}
-    </div>
+    </motion.div>
   );
 }
 

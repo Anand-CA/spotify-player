@@ -1,33 +1,24 @@
-import axios from "../../utils/axios";
-import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Head from "./Head";
-import Banner from "./Banner";
-import Controls from "./Controls";
-import Songs from "./Songs";
-import { getAlbum, resetAlbum } from "../../redux/actions/albums";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getAlbum, resetAlbum } from "../../redux/actions/albums";
+import Banner from "./Banner";
+import Head from "./Head";
+import Songs from "./Songs";
 
 function Album() {
   const router = useRouter();
   const dispatch = useDispatch();
-  // const album = useSelector((state) => state.albums.album);
-  const [album, setAlbum] = useState(null);
-  const [id, setId] = useState(router.query.id);
+  const id = router?.query?.id;
+  const album = useSelector((state) => state.albums.album);
 
   useEffect(() => {
-    if (id) {
-      axios.get(`/albums/${id}`).then((res) => {
-        setAlbum(res.data);
-      });
-    }
+    id && dispatch(getAlbum(id));
 
     return () => {
-      setAlbum(null);
+      dispatch(resetAlbum());
     };
-  }, [id]);
-
-  console.log(album);
+  }, [dispatch, id]);
 
   return (
     <div className="relative overflow-y-auto scrollbar-hide">

@@ -1,63 +1,65 @@
-import Link from "next/link";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { Lazy } from "swiper";
 import "swiper/css";
+import "swiper/css/lazy";
+
 import { Swiper, SwiperSlide } from "swiper/react";
-import { getNewReleases } from "../../redux/actions/albums";
 
-function Section() {
-  const dispatch = useDispatch();
-  const newReleases = useSelector((state) => state.albums.newReleases);
-
-  useEffect(() => {
-    dispatch(getNewReleases());
-  }, [dispatch]);
-
+function Section({ title, data, loading }) {
   return (
     <div>
-      <h2 className="mb-3 text-2xl">New releases</h2>
+      {loading ? (
+        <div className="bg-white/10 rounded-xl animate-pulse w-36 mb-3 h-5"></div>
+      ) : (
+        <h2 className="mb-3 text-lg sm:text-2xl">{title}</h2>
+      )}
 
       <Swiper
         spaceBetween={20}
         slidesPerView={6}
-        slidesPerGroup={4}
+        lazy={true}
+        modules={[Lazy]}
         breakpoints={{
           1726: {
-            slidesPerView: 7,
+            slidesPerView: 6,
             spaceBetween: 20,
+            slidesPerGroup: 6,
           },
           1358: {
             slidesPerView: 5,
+            slidesPerGroup: 5,
             spaceBetween: 20,
           },
-
-          1000: {
+          1210: {
             slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 20,
+          },
+          746: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
             spaceBetween: 20,
           },
           320: {
             slidesPerView: 2,
-            spaceBetween: 20,
+            slidesPerGroup: 2,
+            spaceBetween: 10,
           },
         }}
       >
-        {newReleases.map((a) => (
-          <SwiperSlide className="z-10" key={a.id}>
-            <Link passHref href={`/album/${a.id}`}>
-              <div className="p-3 bg-white/5 hover:bg-white/10 rounded-lg">
-                <img
-                  className="z-10 w-full mb-3"
-                  src={a.images[0]?.url}
-                  alt=""
-                />
-                <h3 className="mb-1">{a?.name}</h3>
-                <p className="text-sm opacity-60">
-                  {a.artists.map((artist) => artist.name).join(", ")}
-                </p>
-              </div>
-            </Link>
-          </SwiperSlide>
-        ))}
+        {loading
+          ? Array(6)
+              .fill()
+              .map((_, i) => (
+                <SwiperSlide key={i}>
+                  <div className="bg-white/10 rounded-lg p-3 space-y-3">
+                    <div className="animate-pulse h-44 bg-white/10" />
+                    <div className="h-4 w-20 rounded-xl bg-white/10" />
+                    <div className="h-3 w-16 rounded-xl bg-white/10" />
+                  </div>
+                </SwiperSlide>
+              ))
+          : data}
       </Swiper>
     </div>
   );

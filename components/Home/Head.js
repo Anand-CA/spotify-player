@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { Router, useRouter } from "next/router";
 import React from "react";
 import Menu from "../../common/Menu";
 
@@ -16,6 +17,12 @@ const Path = (props) => (
 
 function Head() {
   const [isOpen, toggleOpen] = useCycle(false, true);
+  const router = useRouter();
+
+  function logout() {
+    localStorage.removeItem("token");
+    router.push("/login");
+  }
 
   return (
     <>
@@ -26,9 +33,9 @@ function Head() {
       >
         {isOpen && <Menu isOpen={isOpen} toggleOpen={() => toggleOpen()} />}
       </AnimatePresence>
-      <div className="px-5 py-2 flex backdrop-blur-3xl items-center sticky top-0 justify-between z-30">
+      <div className="px-5 py-2 flex backdrop-blur-3xl items-center sticky top-0 z-30">
         {/* left */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center grow gap-3">
           <svg
             width="32"
             height="32"
@@ -59,8 +66,8 @@ function Head() {
           </svg>
         </div>
         {/* hamburger menu */}
-        <button className="sm:hidden" onClick={() => toggleOpen()}>
-          <svg width="23" height="23" viewBox="0 0 23 23">
+        <button className="sm:hidden mt-1.5" onClick={() => toggleOpen()}>
+          <svg className="h-6" viewBox="0 0 23 23">
             <Path
               animate={isOpen ? "open" : "closed"}
               variants={{
@@ -99,13 +106,15 @@ function Head() {
                 alt="avatar"
               />
             </Link>
-            <p className="opacity-60 mr-2">Andrew</p>
+            <p className="cursor-default opacity-60 mr-2">Andrew</p>
           </div>
 
           {/* dropdown */}
           <div className="pt-3 absolute right-0 top-[2.4rem] ">
             <ul className="w-32 group-hover:block hidden bg-white/10 p-2 rounded-full text-center ">
-              <li>Log out</li>
+              <li className="cursor-pointer" onClick={logout}>
+                Log out
+              </li>
             </ul>
           </div>
         </div>

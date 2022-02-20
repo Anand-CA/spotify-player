@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Head from "./Head";
 import { useDispatch, useSelector } from "react-redux";
 import TrackCard from "./TrackCard";
+import { AnimateSharedLayout, motion } from "framer-motion";
 
 function Search() {
   const [categories, setCategories] = useState([]);
@@ -53,11 +54,13 @@ function Search() {
       <Head query={query} setQuery={setQuery} />
 
       {query != "" ? (
-        <div>
-          {queryResult.tracks.map((t) => (
-            <TrackCard t={t} />
-          ))}
-        </div>
+        <AnimateSharedLayout>
+          <motion.div layout>
+            {queryResult.tracks.map((t) => (
+              <TrackCard t={t} />
+            ))}
+          </motion.div>
+        </AnimateSharedLayout>
       ) : (
         <div className="grid mt-10 py-5 px-5 grid-cols-2 sm:grid-cols-5 gap-5">
           {categories.map((c) => (

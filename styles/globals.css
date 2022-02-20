@@ -28,11 +28,11 @@
 @layer components {
   /* global */
   .page {
-    @apply grid grid-cols-1 xl:grid-cols-[20rem_1fr] md:grid-cols-[17rem_1fr] h-screen grid-rows-[1fr_auto];
+    @apply grid grid-cols-1 lg:grid-cols-[15rem_1fr] h-screen grid-rows-[1fr_auto];
   }
 
   /* sidebar */
   .nav-item {
-    @apply flex items-center  gap-4 select-none py-3 pl-8 relative fill-white text-white cursor-pointer font-medium;
+    @apply flex items-center gap-4 select-none py-3 pl-8 relative fill-white text-white cursor-pointer font-medium;
   }
 }
