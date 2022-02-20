@@ -54,7 +54,7 @@ function Menu({ isOpen, toggleOpen }) {
         exit: {
           //   clipPath: "circle(0% at 100% 0%)",
           opacity: 0,
-          y: "-100vw",
+
           transition: {
             type: "spring",
 
@@ -66,10 +66,10 @@ function Menu({ isOpen, toggleOpen }) {
       initial="hidden"
       animate="show"
       exit="exit"
-      className="bg-black z-40 flex flex-col py-3 px-5 fixed top-0 left-0 right-0 bottom-0"
+      className="bg-black z-40 flex flex-col py-4 px-4 fixed top-0 left-0 right-0 bottom-0"
     >
       <button className="sm:hidden self-end " onClick={toggleOpen}>
-        <svg width="23" height="23" viewBox="0 0 23 23">
+        <svg className="h-7" viewBox="0 0 23 23">
           <Path
             animate={isOpen ? "open" : "closed"}
             variants={{

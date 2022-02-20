@@ -59,7 +59,7 @@ function Search() {
           ))}
         </div>
       ) : (
-        <div className="grid mt-10 py-5 px-5 grid-cols-5 gap-5">
+        <div className="grid mt-10 py-5 px-5 grid-cols-2 sm:grid-cols-5 gap-5">
           {categories.map((c) => (
             <div>
               <img

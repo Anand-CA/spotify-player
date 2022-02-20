@@ -51,7 +51,7 @@ function Head() {
           src="/avatar.jfif"
           alt="avatar"
         />
-        <p className="opacity-60 mr-2">Arthur Guillermin Ha</p>
+        <p className="opacity-60 mr-2">Andrew</p>
       </div>
     </div>
   );

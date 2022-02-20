@@ -23,7 +23,7 @@ function Section() {
         slidesPerGroup={4}
         breakpoints={{
           1726: {
-            slidesPerView: 6,
+            slidesPerView: 7,
             spaceBetween: 20,
           },
           1358: {
@@ -44,7 +44,7 @@ function Section() {
         {newReleases.map((a) => (
           <SwiperSlide className="z-10" key={a.id}>
             <Link passHref href={`/album/${a.id}`}>
-              <div className="p-3 bg-white/10 rounded-lg">
+              <div className="p-3 bg-white/5 hover:bg-white/10 rounded-lg">
                 <img
                   className="z-10 w-full mb-3"
                   src={a.images[0]?.url}
