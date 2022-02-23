@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Head from "next/head";
 import axios from "axios";
 import { useEffect } from "react";
