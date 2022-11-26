@@ -156,33 +156,6 @@ function Sidebar() {
         <p className="cursor-pointer select-none opacity-60">
           Rock Save the Queen
         </p>{" "}
-        <p className="cursor-pointer select-none opacity-60">
-          Rock Save the Queen
-        </p>{" "}
-        <p className="cursor-pointer select-none opacity-60">
-          Rock Save the Queen
-        </p>{" "}
-        <p className="cursor-pointer select-none opacity-60">
-          Rock Save the Queen
-        </p>{" "}
-        <p className="cursor-pointer select-none opacity-60">
-          Rock Save the Queen
-        </p>{" "}
-        <p className="cursor-pointer select-none opacity-60">
-          Rock Save the Queen
-        </p>{" "}
-        <p className="cursor-pointer select-none opacity-60">
-          Rock Save the Queen
-        </p>{" "}
-        <p className="cursor-pointer select-none opacity-60">
-          Rock Save the Queen
-        </p>{" "}
-        <p className="cursor-pointer select-none opacity-60">
-          Rock Save the Queen
-        </p>{" "}
-        <p className="cursor-pointer select-none opacity-60">
-          Rock Save the Queen
-        </p>{" "}
       </div>
     </aside>
   );
