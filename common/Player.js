@@ -40,7 +40,6 @@ function Player() {
       axios.get(`/tracks/${activeTrackId}`).then((res) => {
         setTrack(res.data);
         playSong();
-        console.log(res.data);
       });
     }
   }, [activeTrackId]);
@@ -158,9 +157,9 @@ function Player() {
             </g>
           </svg>
 
-          {isPlaying ? (
+          {isPlaying && track? (
             <svg
-              className="h-10"
+              className={`h-10 cursor-pointer`}
               viewBox="0 0 64 64"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -183,7 +182,7 @@ function Player() {
             </svg>
           ) : (
             <svg
-              className="h-10"
+              className={`h-10 ${!track ? "opacity-50 cursor-not-allowed" : "opacity-100"} cursor-pointer`}
               viewBox="0 0 56 56"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

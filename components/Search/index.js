@@ -18,7 +18,6 @@ function Search() {
     axios
       .get(`/browse/categories`)
       .then((res) => {
-        console.log(res.data.categories.items);
         setCategories(res.data.categories.items);
       })
       .catch((err) => {
@@ -29,24 +28,27 @@ function Search() {
   }, []);
 
   useEffect(() => {
-    if (query) {
-      axios
-        .get(`/search?q=${query}&type=track,album,artist`)
-        .then((res) => {
-          console.log(res.data);
-          setQueryResult({
-            ...queryResult,
-            artists: res.data.artists.items,
-            tracks: res.data.tracks.items,
-            albums: res.data.albums.items,
+    const handler = setTimeout(() => {
+      if (query) {
+        axios
+          .get(`/search?q=${query}&type=track,album,artist`)
+          .then((res) => {
+            setQueryResult({
+              artists: res.data.artists.items,
+              tracks: res.data.tracks.items,
+              albums: res.data.albums.items,
+            });
+          })
+          .catch((err) => {
+            console.log(err.response.data);
           });
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
-    }
+      }
+    }, 1000); // Delay of 500ms
 
-    return () => {};
+    // Cleanup function to clear the timeout if the user keeps typing
+    return () => {
+      clearTimeout(handler);
+    };
   }, [query]);
 
   return (
