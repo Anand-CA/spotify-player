@@ -14,15 +14,15 @@ function TrackCard({ t }) {
       layout
       key={t.id}
       onClick={() => {
-        if (t.preview_url) {
+        
           dispatch({
             type: "SET_ACTIVE_TRACKID",
             payload: t.id,
           });
-        }
+        
       }}
       className={`${
-        !t.preview_url && "opacity-50"
+        !t.id && "opacity-50"
       }  flex items-center gap-3 py-2 px-5 cursor-pointer hover:bg-white/10 select-none`}
     >
       {/* content left */}
